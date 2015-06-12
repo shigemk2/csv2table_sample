@@ -495,7 +495,7 @@
 				return cnt;
 			})(cnt)
 
-			var reg='(["](.|(\r\n))*?(["]$|["][,('+op.row_sep_reg+')]))',
+			var reg='(["](.|(\r\n|\r|\n))*?(["]$|["][,('+op.row_sep_reg+')]))',
 				dmystr_comma=''+(dmy[0]+'comma'+cnt+dmy[1]) ,
 				dmystr_rn=''+(dmy[0]+'rn'+cnt+dmy[1]) ,
 				dmystr_wDquote=''+(dmy[0]+'wDquote'+cnt+dmy[1]) ;
@@ -505,13 +505,12 @@
 				new RegExp(reg,"g"),
 				function (after,before,index) {
 					after= after
-							.replace(/(\r\n)(?!$)/g,dmystr_rn)
+							.replace(/(\r\n|\r|\n)(?!$)/g,dmystr_rn)
 							.replace(/,(?!$)/g,dmystr_comma)
 					return after
 
 				}
 			)
-
 			if(op.select == '*'||op.select == ['*'])
 					r=$.csv2table._rowsAry[id]=mkArray(escape,op.col_sep,op.row_sep);
 			else	r=$.csv2table._rowsAry[id]=mkSelectedArray(escape,op.col_sep,op.row_sep,op.select)
@@ -525,7 +524,7 @@
 						b[i][j]=$.trim(r[i][j])
 							.replace(/^"|"$/g,rdq)
 							.replace(new RegExp(dmystr_comma,"g"),",")
-							.replace(new RegExp(dmystr_rn,"g"),"\r\n")
+							.replace(new RegExp(dmystr_rn,"g"),"<br>")
 							.replace(new RegExp(dmystr_wDquote,'g'),'""');
 					} catch(e){}
 				}
