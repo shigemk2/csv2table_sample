@@ -115,6 +115,7 @@
 			sortDImg           : $.csv2table.sortDImg,             //Sort IMG D
 			sortAImg           : $.csv2table.sortAImg,             //Sort IMG A
 			removeDoubleQuote  : true,                             // remove " of "hogehoge"
+			crlf2br            : true,                             // replace "\r\n" to "<br>"
 			appendThead        : null,                             //Array. Append a Row of Thead.(e.g. ["Name","Address"])
 			col_midasi         : 0,                                //
 			row_sep            : '\n',                             //Separator of rows. default '\n'
@@ -516,6 +517,7 @@
 			else	r=$.csv2table._rowsAry[id]=mkSelectedArray(escape,op.col_sep,op.row_sep,op.select)
 
 			var b=[],rowlen=r.length,collen=r[0].length;
+			var crlf=op.crlf2br?"<br>":"\r\n";
 			for(var i=0;i<rowlen;i++){
 				if(r[i]=='')continue;
 				b[i]=r[i];
@@ -524,7 +526,7 @@
 						b[i][j]=$.trim(r[i][j])
 							.replace(/^"|"$/g,rdq)
 							.replace(new RegExp(dmystr_comma,"g"),",")
-							.replace(new RegExp(dmystr_rn,"g"),"<br>")
+							.replace(new RegExp(dmystr_rn,"g"),crlf)
 							.replace(new RegExp(dmystr_wDquote,'g'),'""');
 					} catch(e){}
 				}
