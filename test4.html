@@ -4,10 +4,25 @@
     <script src="./csv2table.mk2.js" type="text/javascript" charset="utf-8"></script>
   </header>
   <body>
+    <h3>CR</h3>
     <div id="view0"></div>
     <script>
       $(function(){
-      $('#view0').csv2table('./data_rn.csv');
+      $('#view0').csv2table('./data_cr.csv');
+      });
+    </script>
+    <h3>LF</h3>
+    <div id="view1"></div>
+    <script>
+      $(function(){
+      $('#view1').csv2table('./data_lf.csv');
+      });
+    </script>
+    <h3>CRLF</h3>
+    <div id="view2"></div>
+    <script>
+      $(function(){
+      $('#view2').csv2table('./data_crlf.csv');
       });
     </script>
   </body>
